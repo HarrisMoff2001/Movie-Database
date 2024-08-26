@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<div [@slideInOut]>
+  <h1>Your Watch List</h1>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<app-movie-list *ngIf="!loading" [movies]="watchlists"></app-movie-list>

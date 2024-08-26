@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<div class="page-number-container">
+  <button
+    id="prevBtn"
+    mat-raised-button
+    color="primary"
+    *ngIf="pageNumber > 1"
+    (click)="handlePrevClick()"
+  >
+    Prev
+  </button>
+  <button
+    id="nextBtn"
+    mat-raised-button
+    color="primary"
+    (click)="handleNextClick()"
+    *ngIf="pageNumber < totalPages"
+  >
+    Next
+  </button>
+  <p id="pageNum">
+    Page:
+    <span> {{ pageNumber }} of {{ totalPages }}</span>
+  </p>
+</div>

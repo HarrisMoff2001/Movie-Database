@@ -1,0 +1,44 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.app-container {
+  padding: 5rem;
+}
+
+.nav-link {
+  font-weight: 300;
+  mat-icon {
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+}
+
+.logo-container {
+  text-align: center;
+  padding: 1rem 0;
+  .app-logo {
+      width: 100px;
+      height: 100px;
+  }
+}
+
+.app-title {
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 5px;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <div class="logo-container">
+      <img src="../../assets/logo.svg" alt="Recipe App Logo" class="app-logo" />
+    </div>
+
+    <mat-nav-list>
+      <a class="nav-link" mat-list-item routerLink="" (click)="navigateSearch()"
+        ><mat-icon>search</mat-icon> Search</a
+      >
+      <a class="nav-link" mat-list-item routerLink="genre"
+        ><mat-icon>apps</mat-icon> Genres</a
+      >
+      <a
+        class="nav-link"
+        mat-list-item
+        routerLink="watch-list"
+        *ngIf="authenticated"
+        ><mat-icon>format_list_bulleted</mat-icon> Watch List</a
+      >
+      <a
+        class="nav-link"
+        mat-list-item
+        routerLink="account"
+        *ngIf="authenticated"
+        ><mat-icon>manage_accounts</mat-icon> Account</a
+      >
+      <a
+        class="nav-link"
+        mat-list-item
+        routerLink="login"
+        *ngIf="!authenticated"
+        ><mat-icon>login</mat-icon> Login</a
+      >
+      <a
+        class="nav-link"
+        mat-list-item
+        (click)="onLogout()"
+        *ngIf="authenticated"
+        ><mat-icon>logout</mat-icon> Logout</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div class="top-bar">
+        <div class="title">
+          <span class="app-title">Movie Finder</span>
+        </div>
+      </div>
+    </mat-toolbar>
+    <div class="app-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,22 @@
+.page-number-container {
+    justify-content: center;
+    text-align: center;
+}
+
+#prevBtn {
+    float: left;
+}
+
+#nextBtn {
+    float: right;
+}
+
+@media screen and (max-width: 294px) {
+    .page-number-container {
+        display: grid;
+        grid-template-rows: repeat(1, 1fr);
+        button {
+            margin: 5px;
+        }
+    }
+}
