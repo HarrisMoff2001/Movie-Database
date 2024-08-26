@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+/>
+
+<div [@slideInOut]>
+  <h1>Trending Movies</h1>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div *ngIf="!loading">
+  <ng-container *ngFor="let genre of trendingData">
+    <h2>{{ genre.genreName }}</h2>
+
+    <!-- If the list of movies for that genre is more than or equal to 4 then it uses a carousel to display the list of movies -->
+    <owl-carousel-o *ngIf="genre.movies.length >= 4" [options]="customOptions">
+      <ng-container *ngFor="let movie of genre.movies">
+        <ng-template class="container" carouselSlide>
+          <app-movie-item [movie]="movie"></app-movie-item>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+
+    <!-- else it displays the movie list like it normally would for other components -->
+    <ng-container *ngIf="genre.movies.length <= 3"
+      ><div class="container">
+        <ng-container *ngFor="let movie of genre.movies">
+          <app-movie-item [movie]="movie"></app-movie-item>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <br />
+  </ng-container>
+</div>
+
+<app-page-num></app-page-num>

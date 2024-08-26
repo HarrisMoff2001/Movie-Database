@@ -1,0 +1,256 @@
+mat-card {
+    padding: 3rem 3rem 2rem 3rem;
+}
+
+.actorCard {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    user-select: none;
+   
+    mat-card {
+        padding: 0rem 1rem 1rem 1rem;
+        max-width: 400px;
+        margin: 0.5rem;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        justify-self: center; 
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        transition: transform 0.3s ease;
+
+        //to add some further depth to the actor card 
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        mat-card-subtitle {
+            padding-bottom: 0.5rem;
+        }
+        
+        mat-card-title,
+        mat-card-subtitle,
+        mat-card-content,
+        mat-card-actions {
+            text-align: center;
+        }
+        
+        img {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    }
+}
+
+.close-action {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+.movie-details {
+    display: flex;
+    align-items: center;
+}
+
+.movie-image {
+    flex: 0 0 33.33333%;
+    margin-right: 2rem;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.movie-overview {
+    flex: 0 0 66.6666%;
+}
+
+.image-container {
+    position: relative;
+}
+
+h1, h2 {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+h2 {
+    font-weight: 400;
+    padding-top: 2rem;
+}
+
+h1 {
+    font-weight: bold;
+    color: white;
+}
+
+.providers-container {
+    display: flex; 
+  }
+  .provider-item {
+    margin-right: 10px; 
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  @media screen and (max-width: 1600px) {
+    .actorCard {
+        grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 1350px) {
+    .actorCard {
+        grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+
+    mat-card {
+        padding: 1rem;
+    }
+
+    .movie-image {
+        display: none;
+    }
+
+    .fav-btn {
+        position: absolute;
+        top: 60px;
+        right: 10px;
+    }
+
+    .header-container {
+        margin-top: 30px;
+    }
+
+    .movie-details {
+        width: 150%;
+    }
+
+    .actorCard {
+        grid-template-columns: repeat(2, 1fr);
+    
+            mat-card {
+                max-width: 300px;
+    
+                img {
+                    width: 150px;
+                    height: 225px;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+            }
+        }
+
+  }
+
+  @media screen and (max-width: 820px) {
+
+    h1, h2 {
+        letter-spacing: 2px;
+        font-size: medium;
+    }
+
+    .movie-details {
+        display: flex;
+        align-items: center;
+    }
+
+    .fav-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .header-container {
+        margin-top: 50px;
+    }
+
+    .providers-container {
+    display: flex; 
+    }
+
+    .provider-item {
+        margin-right: 10px; 
+        img {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        pointer-events: none;
+        user-select: none;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .actorCard {
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+            mat-card{
+                max-width: 150px;
+            
+    
+                img {
+                    width: 100px;
+                    height: 150px;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+            }
+        }
+}
+
+@media screen and (max-width: 690px) {
+    .actorCard {
+        grid-template-columns: repeat(1, 1fr);
+        justify-content: center;
+            mat-card{
+                max-width: 150px;
+    
+                img {
+                    width: 100px;
+                    height: 150px;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+            }
+        }
+}
+
+@media screen and (max-width: 310px) {
+    mat-card, mat-expansion-panel {
+        min-width: 200px;
+        left: -40px;
+    }
+
+    .actorCard {
+        left: 40px;
+        mat-card{
+            left: 0px;
+            min-width: 150px;
+
+            img {
+                width: 100px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
+    }
+}

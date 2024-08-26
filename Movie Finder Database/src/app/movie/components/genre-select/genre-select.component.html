@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div class="genre-container" [@slideDown]>
+  <div
+    class="genre-item"
+    *ngFor="let genre of genres"
+    (click)="onNavigateGenre(genre.genre_ids)"
+  >
+    <div class="overlay">
+      <span>{{ genre.name }}</span>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

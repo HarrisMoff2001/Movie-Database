@@ -1,0 +1,41 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+}
+
+mat-card {
+    width: 50%;
+    min-width: 350px;
+    padding: 2rem;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 5px;
+}
+
+form {
+    margin-top: 2rem;
+}
+
+button {
+    margin-bottom: 1rem;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 374px) {
+    mat-card {
+        width: 90%;
+        min-width: 270px;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}

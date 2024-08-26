@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<div class="auth-container">
+  <mat-card>
+    <h1>Login</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input
+          matInput
+          type="email"
+          placeholder="Email Address"
+          autocomplete="off"
+          formControlName="email"
+        />
+        <mat-error>{{ getEmailError() }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          autocomplete="off"
+          formControlName="password"
+        />
+        <mat-error>Please enter your password.</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="loginForm.invalid">
+        Login
+      </button>
+      <p>
+        Don't have an account? <a routerLink="../register">Register here</a>
+      </p>
+      <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+      <mat-error *ngIf="error">{{ error }}</mat-error>
+    </form>
+  </mat-card>
+</div>

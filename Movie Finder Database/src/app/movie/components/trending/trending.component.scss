@@ -1,0 +1,53 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+    user-select: none;
+}
+
+@media screen and (max-width: 1129px) {
+  .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1rem;
+      row-gap: 1rem;
+  }
+}
+
+.owl-carousel {
+  position: relative;
+
+  .owl-prev,
+  .owl-next {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    background-blend-mode: darken;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    cursor: pointer;
+    padding-top: 5px;
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+  .owl-prev {
+    padding-left: 10px;
+    left: 0;
+  }
+
+  .owl-next {
+    padding-left: 5px;
+    padding-right: 3px;
+    right: 0;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+    h1 {
+        font-size: medium;
+    }
+}

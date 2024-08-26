@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<div class="list-container">
+  <app-movie-item *ngFor="let movie of movies" [movie]="movie"></app-movie-item>
+</div>
+<p *ngIf="movies.length === 0">No Movies to display</p>

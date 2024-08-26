@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div class="content" *ngIf="!loading">
+  <div [@slideDown]>
+    <h1>Account Management</h1>
+    <hr />
+  </div>
+  <br />
+  <div [@slideInOut]>
+    <h2>What Services Do You Have?</h2>
+    <br />
+    <p>
+      Selecting a service that you have will help you know if a movie is
+      streamable on that service or not. it'll be displayed inside of the movie
+      details. Check the box if you have the service.
+    </p>
+    <br />
+    <div class="services-container">
+      <div class="service">
+        <p>Netflix</p>
+        <mat-checkbox
+          [(ngModel)]="netflixChecked"
+          (change)="toggleService('Netflix', netflixChecked, '8')"
+        ></mat-checkbox>
+      </div>
+      <div class="service">
+        <p>Disney+</p>
+        <mat-checkbox
+          [(ngModel)]="disneyChecked"
+          (change)="toggleService('Disney+', disneyChecked, '337')"
+        ></mat-checkbox>
+      </div>
+      <div class="service">
+        <p>Amazon Video</p>
+        <mat-checkbox
+          [(ngModel)]="amazonChecked"
+          (change)="toggleService('Amazon Video', amazonChecked, '9')"
+        ></mat-checkbox>
+      </div>
+      <div class="service">
+        <p>Sky Go</p>
+        <mat-checkbox
+          [(ngModel)]="skyGoChecked"
+          (change)="toggleService('Sky Go', skyGoChecked, '29')"
+        ></mat-checkbox>
+      </div>
+      <div class="service">
+        <p>Now TV</p>
+        <mat-checkbox
+          [(ngModel)]="nowTvChecked"
+          (change)="toggleService('Now TV', nowTvChecked, '591')"
+        ></mat-checkbox>
+      </div>
+    </div>
+  </div>
+</div>

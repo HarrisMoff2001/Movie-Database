@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<ng-container *ngIf="movie$ | async as movie; else loading">
+  <mat-card [@slideInOut]>
+    <div class="header-container">
+      <h1>{{ movie.name }}</h1>
+      <p class="tagline">{{ movie.tagline }}</p>
+    </div>
+    <div class="close-action">
+      <button mat-icon-button (click)="onBack()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="movie-details">
+      <div class="movie-image">
+        <img [src]="movie.imgURL" [alt]="movie.name" />
+      </div>
+      <div class="movie-overview">
+        <div class="fav-btn">
+          <button
+            mat-fab
+            color="warn"
+            *ngIf="authenticated"
+            (click)="onWatchListAction(movie)"
+            [@enlarge]="buttonState"
+          >
+            <mat-icon>{{ isWatchList ? "remove" : "add" }}</mat-icon>
+          </button>
+        </div>
+        <h2>Movie Overview</h2>
+        <p>{{ movie.overview }}</p>
+        <hr />
+        <div
+          class="provider-header"
+          *ngIf="authenticated && serviceConfirmedLength !== 0"
+        >
+          <h2>Where to watch</h2>
+          <div *ngIf="movie.providers && movie.providers.length !== 0">
+            <div class="providers-container">
+              <div
+                *ngFor="let provider of movie.providers"
+                class="provider-item"
+              >
+                <img
+                  [src]="provider.logo_path"
+                  [alt]="provider.provider_name"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="movie.providers && movie.providers.length == 0">
+            <p style="font-weight: bold">Not on any of the services you have</p>
+          </div>
+        </div>
+        <br />
+        <p>
+          Age Rating:
+          <span
+            >{{ movie.certification
+            }}<span
+              *ngIf="movie.certification == null || movie.certification == ''"
+              >Not one found</span
+            ></span
+          >
+        </p>
+        <p>Realse date: {{ movie.releaseDate }}</p>
+        <p>Status: {{ movie.status }}</p>
+        <p>Runtime: {{ movie.runtime }} Minutes</p>
+        <br />
+        <p>
+          Rating:
+          <span *ngIf="movie.reviews.length !== 0">
+            {{ movie.averageRating }}/10</span
+          ><span *ngIf="movie.reviews.length == 0"
+            >No reviews to base rating</span
+          >
+        </p>
+        <hr />
+        <p style="padding-top: 0.5rem">Genre(s)</p>
+        <mat-chip-listbox>
+          <mat-chip *ngFor="let genre of movie.genre" color="primary">
+            {{ genre }}
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>
+    </div>
+    <div class="homepage">
+      <p
+        style="padding-top: 1rem; word-break: break-word"
+        *ngIf="movie.homepage !== ''"
+      >
+        Movie Homepage:
+        <a href="{{ movie.homepage }}" target="_blank">{{ movie.homepage }}</a>
+      </p>
+      <p
+        style="padding-top: 0.5rem; word-break: break-word"
+        *ngIf="movie.trailer !== null"
+      >
+        {{ movie.trailer.channelName }} Trailer:
+        <a href="{{ movie.trailer.trailerURL }}" target="_blank">{{
+          movie.trailer.trailerTitle
+        }}</a>
+      </p>
+    </div>
+  </mat-card>
+  <mat-expansion-panel style="margin-top: 0.5rem">
+    <mat-expansion-panel-header>
+      <mat-panel-title>More Details</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p *ngIf="movie.budget !== '0'">Budget: ${{ movie.budget }}</p>
+    <p *ngIf="movie.revenue !== '0'">Revenue: ${{ movie.revenue }}</p>
+
+    <!--
+    So profit does not show if either budget or revenue is 0 or if just one of them is as then profit would = either the budget or revenue only because
+    there is no calculation to make the profit, this way instead of sayig if profit is the same as budget or revenue then hide as it is possible to break
+    even on the production of a movie and there is no point in showing the profit if it's not a correct calculation due to lack of data from the API response
+    for this movie.
+    -->
+
+    <p
+      *ngIf="
+        ((movie.revenue !== '0' && movie.budget !== '0') ||
+          (movie.revenue === '0' && movie.budget === '0')) &&
+        movie.profit !== '0'
+      "
+    >
+      Profit: ${{ movie.profit }}
+    </p>
+
+    <hr *ngIf="movie.budget && movie.revenue && movie.profit !== '0'" />
+    <h3>Spoken Languages:</h3>
+    <ul>
+      <li *ngFor="let spoken_languages of movie.spoken_languages">
+        {{ spoken_languages }}
+      </li>
+    </ul>
+    <hr />
+    <h3>Production Companies:</h3>
+    <ul>
+      <li *ngFor="let production_companies of movie.production_companies">
+        {{ production_companies }}
+      </li>
+    </ul>
+    <hr />
+    <h3>Cast:</h3>
+    <div class="actorCard">
+      <mat-card
+        *ngFor="let cast of movie.cast"
+        (click)="onActorCardClicked(cast.id)"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ cast.name }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ cast.gender }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          [src]="
+            cast.profile_path
+              ? 'https://image.tmdb.org/t/p/original' + cast.profile_path
+              : './assets/no-poster-available.jpg'
+          "
+          alt="Photo of Actor"
+        />
+        <mat-card-title>{{ cast.character }}</mat-card-title>
+      </mat-card>
+    </div>
+  </mat-expansion-panel>
+  <div class="review-container">
+    <mat-expansion-panel style="margin-top: 0.5rem">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Reviews</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let review of movie.reviews">
+        <p style="word-break: break-word" *ngIf="movie.reviews.length > 0">
+          <strong>{{ review.username }}:</strong><br />{{ review.content }}
+        </p>
+      </div>
+      <p *ngIf="movie.reviews.length == 0">No Reviews Made</p>
+    </mat-expansion-panel>
+  </div>
+</ng-container>
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>

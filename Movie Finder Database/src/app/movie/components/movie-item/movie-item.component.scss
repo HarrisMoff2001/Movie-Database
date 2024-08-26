@@ -1,0 +1,56 @@
+.movie-container { 
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.5rem;
+    z-index: 2;
+    color: white;
+
+    &:hover + img {
+        filter: blur(5px);
+        transform: scale(1.2);
+    }
+}
+
+.overlay:hover {
+    //to make the text more readable when hovering as some backgrounds are pretty light making it hard to read the white text
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+img {
+    max-width: 100%;
+    display: inline-block;
+    transition: all .5s;
+    user-select: none;
+}
+
+.movie-title {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 5px;
+    margin-bottom: .8rem;
+    line-height: 1.7rem;
+    user-select: none;
+}
+
+@media screen and (max-width: 1150px) {
+    h1 {
+        font-size: medium;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .movie-title {
+        display: none;
+    }
+}

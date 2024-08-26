@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<div class="movie-container" (click)="onViewMovie()" [@fadeInOut]>
+  <div class="overlay">
+    <span class="movie-title"
+      ><h1>{{ movie.name }}</h1></span
+    >
+  </div>
+  <img [src]="movie.imgURL" [alt]="movie.name" />
+</div>
